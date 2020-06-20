@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const nodeExternals = require('webpack-node-externals')
 
 const exportedConfig = {
   entry: __dirname + '/browser.ts',
@@ -7,6 +8,9 @@ const exportedConfig = {
     minimize: true,
   },
   mode: 'production',
+  externals: [
+    nodeExternals({whitelist: ['api-mount-client', 'api-mount-server']}),
+  ],
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.js'],
   },

@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const LicenseWebpackPlugin = require('license-webpack-plugin')
   .LicenseWebpackPlugin
+const nodeExternals = require('webpack-node-externals')
 
 const exportedConfig = {
   entry: __dirname + '/node.ts',
@@ -8,6 +9,9 @@ const exportedConfig = {
   plugins: [new LicenseWebpackPlugin()],
   mode: 'development',
   target: 'node',
+  externals: [
+    nodeExternals({whitelist: ['api-mount-client', 'api-mount-server']}),
+  ],
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.js'],
   },

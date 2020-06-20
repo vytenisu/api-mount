@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const LicenseWebpackPlugin = require('license-webpack-plugin')
   .LicenseWebpackPlugin
 const NpmDtsPlugin = require('npm-dts-webpack-plugin')
+const nodeExternals = require('webpack-node-externals')
 
 const exportedConfig = {
   entry: __dirname + '/node.ts',
@@ -11,6 +12,9 @@ const exportedConfig = {
   },
   mode: 'production',
   target: 'node',
+  externals: [
+    nodeExternals({whitelist: ['api-mount-client', 'api-mount-server']}),
+  ],
   plugins: [new LicenseWebpackPlugin(), new NpmDtsPlugin()],
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.js'],
